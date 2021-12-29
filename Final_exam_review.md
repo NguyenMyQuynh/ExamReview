@@ -454,7 +454,8 @@ thông khi có vấn đề xảy ra. VD: Bị drop gói 3 lần đưa ra alert
 - B5: Client gửi certificate của mình cho server. //or not
 - B6: Client generate ra 1 sesion key, sau đó sử dụng public key của server để mã hóa(confidetial - bảo mật) và gửi sesion key đã được mã hóa cho server. Server dùng private key của mình để giải mã.
 - B7: Client dùng private key cảu nó mã hóa (authentication) sesion key. Server dùng public key của client để giải mã và compare (toàn vẹn) 2 session key với nhau. //or not
-Dùng session key mã hóa dữ liệu => tăng performance.
+
+<i>Dùng session key mã hóa dữ liệu => tăng performance.</i>
 
 <br>
 <br>
@@ -471,7 +472,7 @@ Bảo mật, xác thực và toàn vẹn.
 
 <hr>
 
-### SSH 
+# SSH 
 Là giao thức bảo mật cho giao thức telnet để kết nối vào server để quản trị bằng command.
 
 <br>
