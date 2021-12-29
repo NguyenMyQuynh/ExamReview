@@ -383,6 +383,8 @@ Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn v
 
 # SSL/TLS: 
 
+HTTPS (Hypertext Transfer Protocol Secure) là giao thức truyền tải siêu văn bản an toàn. Thực chất, đây chính là giao thức HTTP nhưng tích hợp thêm Chứng chỉ bảo mật SSL nhằm mã hóa các thông điệp giao tiếp để tăng tính bảo mật. 
+
 - Giao thức SSL (Secure Socket Layer Protocol)
 và giao thức TLS (Transport Layer Security
 Protocol) là những giao thức bảo mật tại lớp vận
