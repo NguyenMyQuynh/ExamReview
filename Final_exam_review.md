@@ -101,7 +101,17 @@ IPv4 không có bảo mật chạy trong OSI được add on:
 
 # IP Security
 
-- 2 tinh năng: Authentication(mutual) và Encryption (layer3).
+- 2 tinh năng chính: Authentication(mutual) và Encryption (layer3).
+- Để thực hiện được chức năng chính của mình là bảo mật dữ liệu trong VPN, IPSec cung cấp những tính năng sau:
+
+  - Sự bảo mật dữ liệu (Data Confidentiality): Đảm bảo dữ liệu được an toàn, tránh những kẻ tấn công phá hoại bằng cách thay đổi nội dung hoặc đánh cắp dữ liệu quan trọng. Việc bảo vệ dữ liệu được thực hiện bằng các thuật toán mã hóa như DES, 3DES và AES. Tuy nhiên, đây là một tính năng tùy chọn trong IPSec.
+
+  - Sự toàn vẹn dữ liệu (Data Integrity): Đảm bảo rằng dữ liệu không bị thay đổi trong suốt quá trình trao đổi. Data Integrity bản thân nó không cung cấp sự an toàn dữ liệu. Nó sử dụng thuật toán băm (hash) để kiểm tra dữ liệu bên trong gói tin có bị thay đổi hay không. Những gói tin nào bị phát hiện là đã bị thay đổi thì sẽ bị loại bỏ. Những thuật toán băm: MD5 hoặc SHA-1.
+
+  - Chứng thực nguồn dữ liệu (Data Origin Authentication): Mỗi điểm cuối của VPN dùng tính năng này để xác định đầu phía bên kia có thực sự là người muốn kết nối đến mình hay không. Lưu ý là tính năng này không tồn tại một mình mà phụ thuộc vào tính năng toàn vẹn dữ liệu. Việc chứng thực dựa vào những kĩ thuật: Pre-shared key, certificate, RSA-encryption, RSA-signature.
+
+  - Tránh trùng lặp (Anti-replay): Đảm bảo gói tin không bị trùng lặp bằng việc đánh số thứ tự. Gói tin nào trùng sẽ bị loại bỏ, đây cũng là tính năng tùy chọn.
+
 - Ứng dụng trong:
   - LAN: Authentication: Server xác thực client(hợp lệ hay không) khi client kết nối vào và client xác thực server(server hợp lí) khi server trả kết quả về(2 chiêu).
   - WAN: VPN (Remote Asscess và Site To Site), kênh truyền sử dụng tích hợp tính năng IPPec. 
@@ -160,8 +170,8 @@ VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đ
 
 ![image](https://user-images.githubusercontent.com/62002485/147646097-0f8cf27c-dac9-49f3-a3ea-521012a61dca.png)
 
-- P1: trao đổi khóa, SA.
-- P2: Cơ chế IPSec chạy theo kiểu gì, AH hay ESP, data được truyền trên kênh IPSec đó.
+- P1: trao đổi khóa, SA. (Pre-shared key đảm bảo tính xác thực)
+- P2: Cơ chế IPSec chạy theo kiểu gì, AH hay ESP, client đóng gói dữ liệu theo cơ chế đã thỏa thuận và gửi đến server. (ÍPec header mã hóa, toàn vẹn)
 - P3: data tranfer.
 
 #### IKE là cơ chế trao đổi key
@@ -170,7 +180,6 @@ VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đ
 - 2 modes (main mode và aggressive mode)
 - 3 phương thức xác thực (Preshared-Key {A kết nối đến B, B yêu cầu secret key, A cung cấp và bắt đầu phiên làm việc}; Kerberos {phân vùng tính năng active directory add máy vào và triển khai IPSec và
 Certification {đưa certification của chúng ta cho partner để họ import vào}) 
-
 
 <br>
 
@@ -192,7 +201,74 @@ IPSec gửi dữ liệu bằng cách sử dụng chế độ Tunnel hoặc Trans
 
 Chế độ Tunnel: Trong chế độ Tunnel, toàn bộ gói tin được bảo vệ. IPSec gói gói dữ liệu trong một packet mới, mã hóa nó và thêm một IP header mới. Nó thường được sử dụng trong thiết lập VPN site-to-site. Chế độ Tunnel trong IPsec được sử dụng giữa hai router chuyên dụng, với mỗi router hoạt động như một đầu của "đường hầm" ảo thông qua mạng công cộng. Trong chế độ Tunnel, IP header ban đầu chứa đích cuối cùng của gói được mã hóa, cùng với payload gói. Để cho những router trung gian biết nơi chuyển tiếp các gói tin, IPsec thêm một IP header mới. Tại mỗi đầu của đường hầm, những router giải mã những IP header để chuyển các gói đến đích của chúng.
 
+![image](https://user-images.githubusercontent.com/62002485/147666675-5faaf896-4689-4ac2-ad0b-4e17f9dbf5b8.png)
+
+
 Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn và không được mã hóa. Chỉ có payload và ESP trailer được mã hóa mà thôi. Chế độ Transport thường được sử dụng trong thiết lập VPN client-to-site. Trong chế độ Transport, payload của mỗi gói được mã hóa, nhưng IP header ban đầu thì không. Do đó, các router trung gian có thể xem đích cuối cùng của mỗi gói - trừ khi sử dụng một giao thức tunnel riêng biệt (chẳng hạn như GRE).
+
+![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
+
+
+<br>
+
+<i>Note: Ban đầu, </i>
+
+<br>
+
+### Định dạng AH:
+
+![image](https://user-images.githubusercontent.com/62002485/147662928-56fff433-fe45-4b39-a6f6-7892cdae0de4.png)
+
+Authentication Header (AH) bao gồm các vùng:
+- Next Header (8 bits): xác định header kế tiếp.
+- Payload Length (8 bits): chiều dài của Authentication
+Header theo từ 32-bit, trừ 2.
+- Reserved (16 bits): sử dụng cho tương lai.
+- Security Parameters Index (32 bits): xác định một SA.
+- Sequence Number (32 bits): một giá trị tăng đơn điệu.
+- Authentication Data (variable): Một vùng có chiều dài biến
+đổi (phải là một số nguyên của từ 32 bits) chứa giá trị kiểm
+tra tính toàn vẹn (Integrity Check Value - ICV) đối với gói
+tin này.
+
+Authentication Header
+- Xác thực (SA, Pre-shared key)
+- Toàn vẹn (Hash)
+- Tránh tấn công Replay-Attack (Sequence Number)
+
+<i>Data gốc bao gồm header + payload được hash và cho vào phần Authentication data trong AH IPSec header. Tiến hành gắn cả AH IPSec header vào data gốc và gửi đi. Client nhận được tách data gốc ra tiến hành hash theo thuật toán đã thỏa hiệp trước đó và so sánh với chuỗi hash trong phần Authentication data trong AH IPSec header.</i>
+
+<br>
+
+### Định dạng ESP:
+
+![image](https://user-images.githubusercontent.com/62002485/147662957-192ca97e-0891-4ca6-a8d3-155bf16cfb6e.png)
+
+Một gói ESP chứa các vùng sau:
+- Security Parameters Index (32 bits): xác định một SA.
+- Sequence Number (32 bits): một giá trị đếm tăng đơn
+điệu, cung cấp chức năng anti-replay (giống AH).
+- Payload Data (variable): đây là một segment ở
+transport-level (transport mode) hoặc gói IP (tunnel
+mode) được bảo vệ bởi việc mã hoá.
+- Padding (0255 bytes)
+- Pad Length (8 bits): chỉ ra số byte vùng đứng ngay
+trước vùng này.
+- Next Header (8 bits): chỉ ra kiểu dữ liệu chứa trong
+vùng payload data bằng cách chỉ ra header đầu tiên
+của vùng payload này.
+- Authentication Data (variable): một vùng có chiều dài
+biến đổi (phải là một số nguyên của từ 32-bit) chứa
+ICV được tính bằng cách gói ESP trừ vùng
+Authentication Data.
+
+Encapsulating Security Payload (ESP)
+- Xác thực (SA, Pre-shared key)
+- Toàn vẹn (Hash)
+- Bảo mật (mã hóa luôn phần dữ liệu gốc)
+- Tránh tấn công Replay-Attack (Sequence Number)
+
+<i>Data gốc bao gồm header + payload được hash và cho vào phần Authentication data trong AH IPSec header, đồng thời data gốc cũng được mã hóa và cho vào payload của IPSec header. Tiến hành gửi đi. Client nhận được giải mã phần payload header theo thuật toán đã thỏa hiệp trước đó thu được data gốc, tiến hành hash data gốc (vừa thu được sau giải mã) theo thuật toán đã thỏa hiệp trước đó và so sánh với chuỗi hash trong phần Authentication data trong AH IPSec header.</i>
 
 <br>
 <br>
