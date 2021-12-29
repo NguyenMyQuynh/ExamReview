@@ -79,6 +79,8 @@ Can thiệp vào kết nối giữa mạng lan và internet và proxy đứng sa
 
 <hr>
 
+Các giao thức chạy trên IPv4: HTTP, Telnet,...
+
 Những cuộc tấn công có thể xảy ra với IPv4
 - Eavesdropping =>  Mã hóa dữ liệu.
 - Data modification => IP sử dụng thuật toán hàm băm
@@ -267,6 +269,109 @@ Chế độ Tunnel: Trong chế độ Tunnel, toàn bộ gói tin được bảo
 Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn và không được mã hóa. Chỉ có payload và ESP trailer được mã hóa mà thôi. Chế độ Transport thường được sử dụng trong thiết lập VPN client-to-site. Trong chế độ Transport, payload của mỗi gói được mã hóa, nhưng IP header ban đầu thì không. Do đó, các router trung gian có thể xem đích cuối cùng của mỗi gói - trừ khi sử dụng một giao thức tunnel riêng biệt (chẳng hạn như GRE).
 
 ![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
+
+
+<br>
+<br>
+
+<hr>
+
+# Firewall
+
+- Được đặt ở vị trí giao thương giữa các mạng với nhau, đặc biệt là mạng private và public. Trong mạng private, muốn bảo vệ vùng nào thì đặt firewall trước vùng đó.
+- Firewall hay còn được còn là Tường Lửa. Là thiết
+bị, ỏa hóa hay phần mềm bảo mật được sử dụng
+để quản lý luồng gói tin qua nó : cho phép
+(permit) hay cấm (deny). Xét chiều đi phải xét chiều về, nếu không vd khhi gửi request thì sẽ không nhận được reponse.
+
+<br>
+
+### Phân loại tường lửa
+- Phần cứng: Thiết bị mạng (có hardware của thiết bị, có formware có hdh tối ưu hóa lại và install software firewall lên)
+  - Checkpoint, Cisco ASA, Astaro, Cyberoam,…
+- Phần mềm : Ứng dụng bảo mật được cài trên
+máy tính (Chúng ta phải có 1 con server vật lí RAM, CPU, cài hdh, cài software firewall lên và tiến hành sdung: cài các rules... ==> hdh chưa đc tối ưu hóa và khi xảy ra lỗi ở mức hdh thi ta phải tự xử lí)
+  - ISA Server, IPCop, Smoothwall, Pfsense,…
+- Ảo hóa (nhà cung cấp sẽ cung cấp 1 file để ta import vào hạ tầng ảo hóa và nó sẽ bung ra cho chúng ta máy virtual client đã có hdh và phần mềm security và chúng ta chỉ cần bật máy lên và sử dụng)
+  - SOPHOS, Palo Alto,...
+
+Cả Personal Firewall và Network Firewall
+được chia làm 3 loại chính :
+- Simple Packet Filter Firewalls (Access control list layer3-netwwork)
+- Stateful Packet Filter Firewalls (IP table layer4-transport)
+- Application Level Firewalls (pfsense layer7-application)
+
+<br>
+
+### Simple Packet Filter Firewalls
+Kiểm tra gói tin qua firewall bằng cách so sánh nó với
+những nguyên tắc (Rule) đã được đặt ra, để quyết định
+gói tin đó được cho phép hay bị từ chối. 
+Những thông tin sẽ được kiểm tra:
+- IP Nguồn
+- IP Đích
+- Giao thức
+- Port Nguồn
+- Port Đích
+
+Hoạt động ở Layer 2 và Layer 3
+
+Điểm yếu 
+- Không thấy được sâu bên trong application work như thế nào (VD giao thức https chỉ thấy được traffic nhưng ko biết được port 443 chạy những application nào).
+- Không hỗ trợ authentication, không ngăn chặn ddos, tcp/ip.
+- Log dạng text chứ không hiện lên darkbroad.
+
+<br>
+
+###  Stateful Packet Filter Firewalls
+
+![image](https://user-images.githubusercontent.com/62002485/147690843-6c2c5f54-0fa8-446a-93e0-268cd48768cc.png)
+
+Điểm yếu 
+- Chiếm nhiều tài nguyên hơn.
+- Footprint được nên giảm được attack.
+- Ít giả mạo được hơn vì FW sẽ phát hiện IP Spoofing nhờ stateful table.
+
+<br>
+
+### Application Level Firewalls:
+- Còn được gọi Application-Proxy Gateways.
+- Có thể inspect sâu bên trong gói HTTP header, SMTP header, có khả
+năng điểu khiển truy cập từ Layer 2 đến Layer 7
+- Deep Packet Inspection : kiểm tra chi tiết gói tin
+nên có khả ngăn chặn các ứng dụng Instant
+Message, Peer to Peer,…
+- Hoạt động ở Layer 7
+
+<br>
+
+- Cơ chế Buffering: vd khi download gom tất cả các mẫu nhỏ và discapsulation thành 1 file và scan nó, nếu ok cho qua.
+- Inspect sâu bên trong protocol hiển thị các application đang chạy ở các port cụ thể, băng thông và người dùng.
+==> Giám sát mạng chạy ntn, nhắc nhở ai đang sdung giao thức quá ngưỡng...
+
+<br>
+
+- Tích hợp được LDAP, active directory để xác thực user password.
+- Tích hợp VPN xác thực Token
+- Biometric: one time password - xác thực vân tay.
+- Log rất chi tiết.
+- Authentication
+- Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
+
+
+<br>
+
+###  Mô hình triển khai tường lửa
+
+#### Gateway Mode: 
+FW là nơi giao tiếp giữa 3 mạng, kết nôi các mạng với nhau, filter trafic đi qua các mạng (client ra I, client qua server, DMZ ra I)
+
+![image](https://user-images.githubusercontent.com/62002485/147693402-c34419c8-bfaf-4c3b-bc3e-f54fbcca3313.png)
+
+#### Bridge Mode: 
+không phá vỡ kiến trúc network của hệ thống hiện tại, chỉ cần cắt dây ra ra nhét FW vào và thiết lập FW đó ở chế độ Bridge mode là xong.
+
+![image](https://user-images.githubusercontent.com/62002485/147694017-0e50e948-8188-44b0-8f65-4631ce29cad0.png)
 
 
 <br>
