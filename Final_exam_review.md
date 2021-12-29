@@ -462,10 +462,17 @@ Dùng session key mã hóa dữ liệu => tăng performance.
 <hr>
 
 # PGP (giao thức bảo mật email): 
+Là giao thưc hỗ trợ bảo mật cho giao thức email POP3
 Mã hóa nằm ở phía client.
 Bảo mật, xác thực và toàn vẹn.
 
+<br>
+<br>
 
+<hr>
+
+### SSH 
+Là giao thức bảo mật cho giao thức telnet để kết nối vào server để quản trị bằng command.
 
 <br>
 <br>
