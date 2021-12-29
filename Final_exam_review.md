@@ -144,27 +144,6 @@ Internet.
 
 
 <br>
-  
-### Security Association - SA:
-Là cách thức để hai bên tham gia vào kết nối IPSec đưa ra những thống nhất với nhau về mặt thuật toán.
-Một SA cung cấp các thông tin sau:
-  - Chỉ mục các thông số bảo mật (SPI - Security
-parameters index): là một chuỗi nhị phân 32 bit được
-sử dụng để xác định một tập cụ thể của các giải thuật
-và thông số dùng trong phiên truyền thông. SPI được
-bao gồm trong cả AH và ESP để chắc chắn rằng cả
-hai đều sử dụng cùng các giải thuật và thông số.
-  - Địa chỉ IP đích.
-  - Giao thức bảo mật: AH hay ESP. IPsec không cho
-phép AH hay ESP sử dụng đồng thời trong cùng một
-SA
-
-#### Trao đổi thông tin về giải thuật và các thông số:
-THÔNG BÁO -> CHẤP NHẬN hoặc THƯƠNG LƯỢNG ..... ALL OK IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) cho phần còn lại của phiên làm việc.
-
-VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đến B. B thông báo cho A sd hash md5 mã hóa aes. Nếu A chưa enable tính năng IPSec thì ko hiểu và gửi lại gói request, đến lần thứ 3 B drop gói tin đó. Nếu A enable rồi thì báo lại hash md5 OK, aes ko hỗ trợ chỉ hỗ trợ des ... tiếp tục trao đổi các thông tin cần thiết để thống nhát để làm việc với nhau.
-
-<br>
 
 ### Cơ chế hoạt động:
 
@@ -174,6 +153,8 @@ VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đ
 IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) (Pre-shared key đảm bảo tính xác thực)
 - P2: client đóng gói dữ liệu theo SA đã thỏa thuận và gửi đến server. (ÍPec header mã hóa, toàn vẹn)
 - P3: data tranfer.
+
+<br>
 
 #### IKE là cơ chế trao đổi key
 - Được sử dụng để thiết lập phiên làm việc của IPSec
@@ -196,21 +177,25 @@ Certification {đưa certification của chúng ta cho partner để họ import
 <i>Initiator nhận và sử dụng key + nounce đã đượuc nhận từ server để giải mã và xác nhận đsung server đó.</i>
 
 <br>
+  
+### Security Association - SA:
+Là cách thức để hai bên tham gia vào kết nối IPSec đưa ra những thống nhất với nhau về mặt thuật toán.
+Một SA cung cấp các thông tin sau:
+  - Chỉ mục các thông số bảo mật (SPI - Security
+parameters index): là một chuỗi nhị phân 32 bit được
+sử dụng để xác định một tập cụ thể của các giải thuật
+và thông số dùng trong phiên truyền thông. SPI được
+bao gồm trong cả AH và ESP để chắc chắn rằng cả
+hai đều sử dụng cùng các giải thuật và thông số.
+  - Địa chỉ IP đích.
+  - Giao thức bảo mật: AH hay ESP. IPsec không cho
+phép AH hay ESP sử dụng đồng thời trong cùng một
+SA
 
-### Các phương thức hoạt động của IPsec:
-IPSec gửi dữ liệu bằng cách sử dụng chế độ Tunnel hoặc Transport. Các chế độ này có liên quan chặt chẽ đến loại giao thức được sử dụng, AH hoặc ESP.
+#### Trao đổi thông tin về giải thuật và các thông số:
+THÔNG BÁO -> CHẤP NHẬN hoặc THƯƠNG LƯỢNG ..... ALL OK IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) cho phần còn lại của phiên làm việc.
 
-Chế độ Tunnel: Trong chế độ Tunnel, toàn bộ gói tin được bảo vệ. IPSec gói gói dữ liệu trong một packet mới, mã hóa nó và thêm một IP header mới. Nó thường được sử dụng trong thiết lập VPN site-to-site. Chế độ Tunnel trong IPsec được sử dụng giữa hai router chuyên dụng, với mỗi router hoạt động như một đầu của "đường hầm" ảo thông qua mạng công cộng. Trong chế độ Tunnel, IP header ban đầu chứa đích cuối cùng của gói được mã hóa, cùng với payload gói. Để cho những router trung gian biết nơi chuyển tiếp các gói tin, IPsec thêm một IP header mới. Tại mỗi đầu của đường hầm, những router giải mã những IP header để chuyển các gói đến đích của chúng.
-
-![image](https://user-images.githubusercontent.com/62002485/147666675-5faaf896-4689-4ac2-ad0b-4e17f9dbf5b8.png)
-
-
-Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn và không được mã hóa. Chỉ có payload và ESP trailer được mã hóa mà thôi. Chế độ Transport thường được sử dụng trong thiết lập VPN client-to-site. Trong chế độ Transport, payload của mỗi gói được mã hóa, nhưng IP header ban đầu thì không. Do đó, các router trung gian có thể xem đích cuối cùng của mỗi gói - trừ khi sử dụng một giao thức tunnel riêng biệt (chẳng hạn như GRE).
-
-![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
-
-
-<br>
+VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đến B. B thông báo cho A sd hash md5 mã hóa aes. Nếu A chưa enable tính năng IPSec thì ko hiểu và gửi lại gói request, đến lần thứ 3 B drop gói tin đó. Nếu A enable rồi thì báo lại hash md5 OK, aes ko hỗ trợ chỉ hỗ trợ des ... tiếp tục trao đổi các thông tin cần thiết để thống nhát để làm việc với nhau.
 
 <br>
 
@@ -270,6 +255,21 @@ Encapsulating Security Payload (ESP)
 <i>Data gốc bao gồm header + payload được hash và cho vào phần Authentication data trong AH IPSec header, đồng thời data gốc cũng được mã hóa và cho vào payload của IPSec header. Tiến hành gửi đi. Client nhận được giải mã phần payload header theo thuật toán đã thỏa hiệp trước đó thu được data gốc, tiến hành hash data gốc (vừa thu được sau giải mã) theo thuật toán đã thỏa hiệp trước đó và so sánh với chuỗi hash trong phần Authentication data trong AH IPSec header.</i>
 
 <br>
+
+### Các phương thức hoạt động của IPsec:
+IPSec gửi dữ liệu bằng cách sử dụng chế độ Tunnel hoặc Transport. Các chế độ này có liên quan chặt chẽ đến loại giao thức được sử dụng, AH hoặc ESP.
+
+Chế độ Tunnel: Trong chế độ Tunnel, toàn bộ gói tin được bảo vệ. IPSec gói gói dữ liệu trong một packet mới, mã hóa nó và thêm một IP header mới. Nó thường được sử dụng trong thiết lập VPN site-to-site. Chế độ Tunnel trong IPsec được sử dụng giữa hai router chuyên dụng, với mỗi router hoạt động như một đầu của "đường hầm" ảo thông qua mạng công cộng. Trong chế độ Tunnel, IP header ban đầu chứa đích cuối cùng của gói được mã hóa, cùng với payload gói. Để cho những router trung gian biết nơi chuyển tiếp các gói tin, IPsec thêm một IP header mới. Tại mỗi đầu của đường hầm, những router giải mã những IP header để chuyển các gói đến đích của chúng.
+
+![image](https://user-images.githubusercontent.com/62002485/147666675-5faaf896-4689-4ac2-ad0b-4e17f9dbf5b8.png)
+
+
+Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn và không được mã hóa. Chỉ có payload và ESP trailer được mã hóa mà thôi. Chế độ Transport thường được sử dụng trong thiết lập VPN client-to-site. Trong chế độ Transport, payload của mỗi gói được mã hóa, nhưng IP header ban đầu thì không. Do đó, các router trung gian có thể xem đích cuối cùng của mỗi gói - trừ khi sử dụng một giao thức tunnel riêng biệt (chẳng hạn như GRE).
+
+![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
+
+
+<br>
 <br>
 
 <hr>
@@ -280,7 +280,3 @@ Encapsulating Security Payload (ESP)
 - Client ko có certificate thì server không xác thực được là client có phải đúng là client hợp lệ hay ko.
 
 ![image](https://user-images.githubusercontent.com/62002485/147627060-76f392fd-1b7e-4369-9969-106071183edd.png)
-
-
-
-
