@@ -375,8 +375,6 @@ Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn v
 ![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
 
 
-
-
 <br>
 <br>
 
@@ -458,5 +456,73 @@ thông khi có vấn đề xảy ra. VD: Bị drop gói 3 lần đưa ra alert
 - B7: Client dùng private key cảu nó mã hóa (authentication) sesion key. Server dùng public key của client để giải mã và compare (toàn vẹn) 2 session key với nhau. //or not
 Dùng session key mã hóa dữ liệu => tăng performance.
 
+<br>
+<br>
 
+<hr>
 
+# IDS/IPS
+
+<br>
+
+### IDS
+
+Intrusion Detection: qui trình theo dõi các sự kiện
+xuất hiện trong `hệ thống máy tính` và `mạng`. Sau đó
+phân tích chúng có dấu hiệu của sự xâm nhập hay
+không?
+
+Intrusion Detection
+System: là một hệ
+thống tự động giám
+sát hoạt động trên hệ
+thống mạng và phân
+tích để tìm ra các dấu
+hiệu vi phạm đến các
+quy định bảo mật máy
+tính,chính sách sử
+dụng và các tiêu chuẩn
+an toàn thông tin.
+
+![image](https://user-images.githubusercontent.com/62002485/147706065-0d42d6ad-f643-4414-a8b8-1df61276cb7b.png)
+
+<br>
+
+### IPS:
+
+Intrusion Prevention
+System: là một hệ
+thống bao gồm cả
+chức năng phát hiện
+xâm nhập (Intrusion
+Detection – ID) và
+khả năng ngăn chặn
+các xâm nhập trái
+phép vào tài nguyên
+của hệ thống mạng
+
+Ngoài giám sát, IPS thực hiện phân tích, kết nối nhiều sensor để học xem malicous trafic có xuất hiện trong toàn mjang không, sau đó đưa về Management 
+Console để quyết định xem có cảnh báo không. 
+Sau khi cảnh báo sẽ đưa ra phản ứng như block, ghi log, alert, cho qua nhưng vẫn log hoặc alert...
+
+![image](https://user-images.githubusercontent.com/62002485/147706570-7c18073d-51a7-422c-a489-33f2ea7efeb4.png)
+
+<br>
+
+### Thành phần chính của IDS/IPS
+
+![image](https://user-images.githubusercontent.com/62002485/147706636-9c4669e4-89db-488b-b9ec-d352ddf2cf25.png)
+
+![image](https://user-images.githubusercontent.com/62002485/147706653-3d07c190-ebfc-4711-9a61-772caabadc21.png)
+
+### Phân loại IDS/IPS
+
+Network–based (NIDS/NIPS) và Host–based IDS (HIDS/HIPS)
+
+![image](https://user-images.githubusercontent.com/62002485/147706993-d911d383-3737-43c9-9402-cfbe8fd70c7c.png)
+
+![image](https://user-images.githubusercontent.com/62002485/147707000-e4579a30-2c46-415a-b31a-07e35dcacf47.png)
+
+Cài HIDS/HIPS, NIDS/NIPS cho server. Trên Core-switch cài IDS monitor tất cả trafic đi qua đi lại client.
+<br>
+Không cài HIPS trên client vì tốn chi phí và make noisy (chặn liên tục, user không sử dụng được).
