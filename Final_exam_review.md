@@ -88,7 +88,8 @@ Những cuộc tấn công có thể xảy ra với IPv4
 
 IPv4 không có bảo mật chạy trong OSI được add on:
 - NetworkL: IPSec 
-- Application: HTTPS, SLL, Secure Shell 
+- Application: HTTPS, SLL, Secure Shell, PGP, Kerberos
+- Transport Layer: Transport Layer Security (TLS)
 
 ![image](https://user-images.githubusercontent.com/62002485/147626957-edf833ba-a34c-41a5-b72d-7122419bc0de.png)
 
@@ -105,6 +106,8 @@ IPv4 không có bảo mật chạy trong OSI được add on:
   - LAN: Authentication: Server xác thực client(hợp lệ hay không) khi client kết nối vào và client xác thực server(server hợp lí) khi server trả kết quả về(2 chiêu).
   - WAN: VPN (Remote Asscess và Site To Site), kênh truyền sử dụng tích hợp tính năng IPPec. 
 
+![image](https://user-images.githubusercontent.com/62002485/147626281-860641d3-cc4e-4fe5-960e-44e702331444.png)
+
 - Là một giao thức bảo mật chính tại lớp Mạng (Network Layer –
 OSI) hoặc lớp Internet (Internet Layer – TCP/IP).
 - IPsec là yếu tố quan trọng để xây dựng mạng riêng ảo (VPN –
@@ -119,6 +122,8 @@ tin).
   - IKE (Internet key exchange): được sử dụng để thiết lập khoá
 bí mật cho người gởi và người nhận.
 
+<br>
+
 ### Ứng dụng của IPsec:
 - Bảo mật kết nối giữa các chi nhánh văn phòng qua
 Internet.
@@ -127,13 +132,60 @@ Internet.
 đối tác (Partners).
 - Nâng cao tính bảo mật trong thương mại điện tử.
 
-### Trao đổi thông tin về giải thuật và các thông số:
-THÔNG BÁO -> CHẤP NHẬN hoặc THƯƠNG LUOJNG ..... ALL OK IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) cho phần còn lại của phiên làm việc.
 
-VD A muốn thiêt lập IPSec với B. A thông báo cho B sd hash md5 ma hóa aes, B báo lại hash md5 OK, aes ko hỗ trợ chỉ hỗ trợ des ... tiếp tục trao đổi các thông tin cần thiết để thống nhát để làm việc với nhau.
-
+<br>
   
-![image](https://user-images.githubusercontent.com/62002485/147626281-860641d3-cc4e-4fe5-960e-44e702331444.png)
+### Security Association - SA:
+Là cách thức để hai bên tham gia vào kết nối IPSec đưa ra những thống nhất với nhau về mặt thuật toán.
+Một SA cung cấp các thông tin sau:
+  - Chỉ mục các thông số bảo mật (SPI - Security
+parameters index): là một chuỗi nhị phân 32 bit được
+sử dụng để xác định một tập cụ thể của các giải thuật
+và thông số dùng trong phiên truyền thông. SPI được
+bao gồm trong cả AH và ESP để chắc chắn rằng cả
+hai đều sử dụng cùng các giải thuật và thông số.
+  - Địa chỉ IP đích.
+  - Giao thức bảo mật: AH hay ESP. IPsec không cho
+phép AH hay ESP sử dụng đồng thời trong cùng một
+SA
+
+#### Trao đổi thông tin về giải thuật và các thông số:
+THÔNG BÁO -> CHẤP NHẬN hoặc THƯƠNG LƯỢNG ..... ALL OK IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) cho phần còn lại của phiên làm việc.
+
+VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đến B. B thông báo cho A sd hash md5 mã hóa aes. Nếu A chưa enable tính năng IPSec thì ko hiểu và gửi lại gói request, đến lần thứ 3 B drop gói tin đó. Nếu A enable rồi thì báo lại hash md5 OK, aes ko hỗ trợ chỉ hỗ trợ des ... tiếp tục trao đổi các thông tin cần thiết để thống nhát để làm việc với nhau.
+
+<br>
+
+### Cơ chế hoạt động:
+
+![image](https://user-images.githubusercontent.com/62002485/147646097-0f8cf27c-dac9-49f3-a3ea-521012a61dca.png)
+
+- P1: trao đổi khóa, SA.
+- P2: Cơ chế IPSec chạy theo kiểu gì, AH hay ESP, data được truyền trên kênh IPSec đó.
+- P3: data tranfer.
+
+#### IKE là cơ chế trao đổi key
+- Được sử dụng để thiết lập phiên làm việc của IPSec
+- Có 5 giá trị được thỏa thuận:
+- 2 modes (main mode và aggressive mode)
+- 3 phương thức xác thực (Preshared-Key {A kết nối đến B, B yêu cầu secret key, A cung cấp và bắt đầu phiên làm việc}; Kerberos {phân vùng tính năng active directory add máy vào và triển khai IPSec và
+Certification {đưa certification của chúng ta cho partner để họ import vào}) 
+
+
+<br>
+
+![image](https://user-images.githubusercontent.com/62002485/147649926-64ca758e-2726-4565-95d0-44a4a841574f.png)
+
+MSG 1: client gửi gói tin có IP đích đến server, đề xuất thuật toán encryption(aes or RSA) và authentication (md5).
+MSG 2: server phản hồi đồng ý (or không)
+MSG 3: gửi key thông qua cơ chế Diffie-Hellman(thông tin đẻ tạo ra key chứ ko phải key thực sự ... @@) để ko bị lộ key trên đường truyền. Ngoài ra còn đính kèm thêm một giá trị random Nonce khi mã hóa chèn mã đó vào tránh trường hợp bị phá mã.
+MSG 4: gửi key thông qua cơ chế Diffie-Hellman. Sau buiwsc này thống nhất key và hai bên có nonce của nhau.
+MSG 5: initiator tiến hành việc sign lên và sử dụng key(random nên có thể trùng giữa các client) đã thống nhất + nounce (ko trùng do được tạo ra mỗi khi 1client kết nói vô server) để encrypt.
+MSG 6: server trích lục trong hệ quản trị(có 1 loạt các key và nounce) key và nonce nào giải mã ra được thì biết chắc chắn là initiator đó gửi chứ ko phải nào khác, tiến hành reponse signature mã hóa và gửi lại cho initiator. 
+<i>Initiator nhận và sử dụng key + nounce đã đượuc nhận từ server để giải mã và xác nhận đsung server đó.</i>
+
+<br>
+<br>
 
 <hr>
 
