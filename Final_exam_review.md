@@ -170,8 +170,9 @@ VD: B đã enable IPSec. A muốn thiêt lập IPSec với B. A gửi request đ
 
 ![image](https://user-images.githubusercontent.com/62002485/147646097-0f8cf27c-dac9-49f3-a3ea-521012a61dca.png)
 
-- P1: trao đổi khóa, SA. (Pre-shared key đảm bảo tính xác thực)
-- P2: Cơ chế IPSec chạy theo kiểu gì, AH hay ESP, client đóng gói dữ liệu theo cơ chế đã thỏa thuận và gửi đến server. (ÍPec header mã hóa, toàn vẹn)
+- P1: thỏa thuận cơ chế trao đổi khóa và sử dụng cơ chế đó để xác thực. Một khi các giải thuật và các thông số được lựa chọn,
+IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) (Pre-shared key đảm bảo tính xác thực)
+- P2: client đóng gói dữ liệu theo SA đã thỏa thuận và gửi đến server. (ÍPec header mã hóa, toàn vẹn)
 - P3: data tranfer.
 
 #### IKE là cơ chế trao đổi key
@@ -210,8 +211,6 @@ Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn v
 
 
 <br>
-
-<i>Note: Ban đầu, </i>
 
 <br>
 
