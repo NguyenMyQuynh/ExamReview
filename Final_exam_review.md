@@ -461,6 +461,17 @@ Dùng session key mã hóa dữ liệu => tăng performance.
 
 <hr>
 
+# PGP (giao thức bảo mật email): 
+Mã hóa nằm ở phía client.
+Bảo mật, xác thực và toàn vẹn.
+
+
+
+<br>
+<br>
+
+<hr>
+
 # IDS/IPS
 
 <br>
@@ -511,6 +522,8 @@ Sau khi cảnh báo sẽ đưa ra phản ứng như block, ghi log, alert, cho q
 
 ### Thành phần chính của IDS/IPS
 
+Nên đặt sau FW để ghi nhớ các cuộc tấn công vượt FW, đặt trược dex bị Ddos attack.
+
 ![image](https://user-images.githubusercontent.com/62002485/147706636-9c4669e4-89db-488b-b9ec-d352ddf2cf25.png)
 
 ![image](https://user-images.githubusercontent.com/62002485/147706653-3d07c190-ebfc-4711-9a61-772caabadc21.png)
@@ -528,4 +541,6 @@ Cài HIDS/HIPS, NIDS/NIPS cho server. Trên Core-switch cài IDS monitor tất c
 Không cài HIPS trên client vì tốn chi phí và make noisy (chặn liên tục, user không sử dụng được).
 
 ![image](https://user-images.githubusercontent.com/62002485/147707624-48b0614f-37bb-4791-baf2-2f768f52af63.png)
+
+
 
