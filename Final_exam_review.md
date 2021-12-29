@@ -412,6 +412,7 @@ giao thức:
   
 ![image](https://user-images.githubusercontent.com/62002485/147700916-bee50897-d19f-43d8-8317-48886e138458.png)
 
+<br>
 
 ### Record protocol của SSL
 
@@ -421,6 +422,8 @@ Sau đó chuyển xuống tầng dưới đóng thêm header tầng 4, 3 vào.
 ==> Dữ liệu vừa toàn vẹn vừa an toàn.
 
 ![image](https://user-images.githubusercontent.com/62002485/147701676-aec30b28-8fbf-47ad-b8bf-55391f62695c.png)
+
+<br>
 
 ### Các giao thức của SSL
 
