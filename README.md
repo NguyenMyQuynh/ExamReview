@@ -470,6 +470,9 @@ Là giao thưc hỗ trợ bảo mật cho giao thức email POP3
 Mã hóa nằm ở phía client.
 Bảo mật, xác thực và toàn vẹn.
 
+![image](https://user-images.githubusercontent.com/62002485/147709421-d0854d87-8cea-4b19-a450-04fe94210f37.png)
+
+
 <br>
 <br>
 
