@@ -74,5 +74,76 @@ Can thiệp vào kết nối giữa mạng lan và internet và proxy đứng sa
 
 ![image](https://user-images.githubusercontent.com/62002485/147621172-b2f63fbd-14fb-4157-9379-7cb7f5356c6f.png)
 
+<br>
+<br>
+
+<hr>
+
+Những cuộc tấn công có thể xảy ra với IPv4
+- Eavesdropping =>  Mã hóa dữ liệu.
+- Data modification => IP sử dụng thuật toán hàm băm
+- Identity spoofing (IP address spoofing) => IP sử dụng thuật toán hàm băm
+- Denial-of-service attack => Cho phép firewall block traffic
+- Man-in-the-middle attack => Sử dụng cơ chế xác thực lẫn nhau + Shared Key: vừa xác thực vừa mã hóa
+
+IPv4 không có bảo mật chạy trong OSI được add on:
+- NetworkL: IPSec 
+- Application: HTTPS, SLL, Secure Shell 
+
+![image](https://user-images.githubusercontent.com/62002485/147626957-edf833ba-a34c-41a5-b72d-7122419bc0de.png)
+
+<br>
+<br>
+
+<hr>
+
+
+# IP Security
+
+- 2 tinh năng: Authentication(mutual) và Encryption (layer3).
+- Ứng dụng trong:
+  - LAN: Authentication: Server xác thực client(hợp lệ hay không) khi client kết nối vào và client xác thực server(server hợp lí) khi server trả kết quả về(2 chiêu).
+  - WAN: VPN (Remote Asscess và Site To Site), kênh truyền sử dụng tích hợp tính năng IPPec. 
+
+- Là một giao thức bảo mật chính tại lớp Mạng (Network Layer –
+OSI) hoặc lớp Internet (Internet Layer – TCP/IP).
+- IPsec là yếu tố quan trọng để xây dựng mạng riêng ảo (VPN –
+Virtual Private Networks).
+- Bao gồm các giao thức chứng thực, các giao thức mã hoá, các
+giao thức trao đổi khoá:
+  - AH (Authentication header): được sử dụng để xác định
+nguồn gốc gói tin IP và đảm bảo tính toàn vẹn của nó.
+  - ESP (Encapsulating Security Payload): được sử dụng để
+chứng thực và mã hoá gói tin IP (phần payload hoặc cả gói
+tin).
+  - IKE (Internet key exchange): được sử dụng để thiết lập khoá
+bí mật cho người gởi và người nhận.
+
+### Ứng dụng của IPsec:
+- Bảo mật kết nối giữa các chi nhánh văn phòng qua
+Internet.
+- Bảo mật truy cập từ xa qua Internet.
+- Thực hiện những kết nối Intranet và Extranet với các
+đối tác (Partners).
+- Nâng cao tính bảo mật trong thương mại điện tử.
+
+### Trao đổi thông tin về giải thuật và các thông số:
+THÔNG BÁO -> CHẤP NHẬN hoặc THƯƠNG LUOJNG ..... ALL OK IPsec thiết lập sự kết hợp bảo mật (Security Association - SA) cho phần còn lại của phiên làm việc.
+
+VD A muốn thiêt lập IPSec với B. A thông báo cho B sd hash md5 ma hóa aes, B báo lại hash md5 OK, aes ko hỗ trợ chỉ hỗ trợ des ... tiếp tục trao đổi các thông tin cần thiết để thống nhát để làm việc với nhau.
+
+  
+![image](https://user-images.githubusercontent.com/62002485/147626281-860641d3-cc4e-4fe5-960e-44e702331444.png)
+
+<hr>
+
+# SSL
+
+- 2 tinh năng: Authentication(mutual) và Encryption (layer7).
+- Client ko có certificate thì server không xác thực được là client có phải đúng là client hợp lệ hay ko.
+
+![image](https://user-images.githubusercontent.com/62002485/147627060-76f392fd-1b7e-4369-9969-106071183edd.png)
+
+
 
 
