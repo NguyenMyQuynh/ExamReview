@@ -74,6 +74,109 @@ Can thiệp vào kết nối giữa mạng lan và internet và proxy đứng sa
 
 ![image](https://user-images.githubusercontent.com/62002485/147621172-b2f63fbd-14fb-4157-9379-7cb7f5356c6f.png)
 
+
+<br>
+<br>
+
+<hr>
+
+# Firewall
+
+- Được đặt ở vị trí giao thương giữa các mạng với nhau, đặc biệt là mạng private và public. Trong mạng private, muốn bảo vệ vùng nào thì đặt firewall trước vùng đó.
+- Firewall hay còn được còn là Tường Lửa. Là thiết
+bị, ỏa hóa hay phần mềm bảo mật được sử dụng
+để quản lý luồng gói tin qua nó : cho phép
+(permit) hay cấm (deny). Xét chiều đi phải xét chiều về, nếu không vd khhi gửi request thì sẽ không nhận được reponse.
+
+<br>
+
+### Phân loại tường lửa
+- Phần cứng: Thiết bị mạng (có hardware của thiết bị, có formware có hdh tối ưu hóa lại và install software firewall lên)
+  - Checkpoint, Cisco ASA, Astaro, Cyberoam,…
+- Phần mềm : Ứng dụng bảo mật được cài trên
+máy tính (Chúng ta phải có 1 con server vật lí RAM, CPU, cài hdh, cài software firewall lên và tiến hành sdung: cài các rules... ==> hdh chưa đc tối ưu hóa và khi xảy ra lỗi ở mức hdh thi ta phải tự xử lí)
+  - ISA Server, IPCop, Smoothwall, Pfsense,…
+- Ảo hóa (nhà cung cấp sẽ cung cấp 1 file để ta import vào hạ tầng ảo hóa và nó sẽ bung ra cho chúng ta máy virtual client đã có hdh và phần mềm security và chúng ta chỉ cần bật máy lên và sử dụng)
+  - SOPHOS, Palo Alto,...
+
+Cả Personal Firewall và Network Firewall
+được chia làm 3 loại chính :
+- Simple Packet Filter Firewalls (Access control list layer3-netwwork)
+- Stateful Packet Filter Firewalls (IP table layer4-transport)
+- Application Level Firewalls (pfsense layer7-application)
+
+<br>
+
+### Simple Packet Filter Firewalls
+Kiểm tra gói tin qua firewall bằng cách so sánh nó với
+những nguyên tắc (Rule) đã được đặt ra, để quyết định
+gói tin đó được cho phép hay bị từ chối. 
+Những thông tin sẽ được kiểm tra:
+- IP Nguồn
+- IP Đích
+- Giao thức
+- Port Nguồn
+- Port Đích
+
+Hoạt động ở Layer 2 và Layer 3
+
+Điểm yếu 
+- Không thấy được sâu bên trong application work như thế nào (VD giao thức https chỉ thấy được traffic nhưng ko biết được port 443 chạy những application nào).
+- Không hỗ trợ authentication, không ngăn chặn ddos, tcp/ip.
+- Log dạng text chứ không hiện lên darkbroad.
+
+<br>
+
+###  Stateful Packet Filter Firewalls
+
+![image](https://user-images.githubusercontent.com/62002485/147690843-6c2c5f54-0fa8-446a-93e0-268cd48768cc.png)
+
+Điểm yếu 
+- Chiếm nhiều tài nguyên hơn.
+- Footprint được nên giảm được attack.
+- Ít giả mạo được hơn vì FW sẽ phát hiện IP Spoofing nhờ stateful table.
+
+<br>
+
+### Application Level Firewalls:
+- Còn được gọi Application-Proxy Gateways.
+- Có thể inspect sâu bên trong gói HTTP header, SMTP header, có khả
+năng điểu khiển truy cập từ Layer 2 đến Layer 7
+- Deep Packet Inspection : kiểm tra chi tiết gói tin
+nên có khả ngăn chặn các ứng dụng Instant
+Message, Peer to Peer,…
+- Hoạt động ở Layer 7
+
+<br>
+
+- Cơ chế Buffering: vd khi download gom tất cả các mẫu nhỏ và discapsulation thành 1 file và scan nó, nếu ok cho qua.
+- Inspect sâu bên trong protocol hiển thị các application đang chạy ở các port cụ thể, băng thông và người dùng.
+==> Giám sát mạng chạy ntn, nhắc nhở ai đang sdung giao thức quá ngưỡng...
+
+<br>
+
+- Tích hợp được LDAP, active directory để xác thực user password.
+- Tích hợp VPN xác thực Token
+- Biometric: one time password - xác thực vân tay.
+- Log rất chi tiết.
+- Authentication
+- Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
+
+
+<br>
+
+###  Mô hình triển khai tường lửa
+
+#### Gateway Mode: 
+FW là nơi giao tiếp giữa 3 mạng, kết nôi các mạng với nhau, filter trafic đi qua các mạng (client ra I, client qua server, DMZ ra I)
+
+![image](https://user-images.githubusercontent.com/62002485/147693402-c34419c8-bfaf-4c3b-bc3e-f54fbcca3313.png)
+
+#### Bridge Mode: 
+không phá vỡ kiến trúc network của hệ thống hiện tại, chỉ cần cắt dây ra ra nhét FW vào và thiết lập FW đó ở chế độ Bridge mode là xong.
+
+![image](https://user-images.githubusercontent.com/62002485/147694017-0e50e948-8188-44b0-8f65-4631ce29cad0.png)
+
 <br>
 <br>
 
@@ -272,107 +375,6 @@ Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn v
 ![image](https://user-images.githubusercontent.com/62002485/147666651-6c872b04-b184-4970-b3a4-053806919749.png)
 
 
-<br>
-<br>
-
-<hr>
-
-# Firewall
-
-- Được đặt ở vị trí giao thương giữa các mạng với nhau, đặc biệt là mạng private và public. Trong mạng private, muốn bảo vệ vùng nào thì đặt firewall trước vùng đó.
-- Firewall hay còn được còn là Tường Lửa. Là thiết
-bị, ỏa hóa hay phần mềm bảo mật được sử dụng
-để quản lý luồng gói tin qua nó : cho phép
-(permit) hay cấm (deny). Xét chiều đi phải xét chiều về, nếu không vd khhi gửi request thì sẽ không nhận được reponse.
-
-<br>
-
-### Phân loại tường lửa
-- Phần cứng: Thiết bị mạng (có hardware của thiết bị, có formware có hdh tối ưu hóa lại và install software firewall lên)
-  - Checkpoint, Cisco ASA, Astaro, Cyberoam,…
-- Phần mềm : Ứng dụng bảo mật được cài trên
-máy tính (Chúng ta phải có 1 con server vật lí RAM, CPU, cài hdh, cài software firewall lên và tiến hành sdung: cài các rules... ==> hdh chưa đc tối ưu hóa và khi xảy ra lỗi ở mức hdh thi ta phải tự xử lí)
-  - ISA Server, IPCop, Smoothwall, Pfsense,…
-- Ảo hóa (nhà cung cấp sẽ cung cấp 1 file để ta import vào hạ tầng ảo hóa và nó sẽ bung ra cho chúng ta máy virtual client đã có hdh và phần mềm security và chúng ta chỉ cần bật máy lên và sử dụng)
-  - SOPHOS, Palo Alto,...
-
-Cả Personal Firewall và Network Firewall
-được chia làm 3 loại chính :
-- Simple Packet Filter Firewalls (Access control list layer3-netwwork)
-- Stateful Packet Filter Firewalls (IP table layer4-transport)
-- Application Level Firewalls (pfsense layer7-application)
-
-<br>
-
-### Simple Packet Filter Firewalls
-Kiểm tra gói tin qua firewall bằng cách so sánh nó với
-những nguyên tắc (Rule) đã được đặt ra, để quyết định
-gói tin đó được cho phép hay bị từ chối. 
-Những thông tin sẽ được kiểm tra:
-- IP Nguồn
-- IP Đích
-- Giao thức
-- Port Nguồn
-- Port Đích
-
-Hoạt động ở Layer 2 và Layer 3
-
-Điểm yếu 
-- Không thấy được sâu bên trong application work như thế nào (VD giao thức https chỉ thấy được traffic nhưng ko biết được port 443 chạy những application nào).
-- Không hỗ trợ authentication, không ngăn chặn ddos, tcp/ip.
-- Log dạng text chứ không hiện lên darkbroad.
-
-<br>
-
-###  Stateful Packet Filter Firewalls
-
-![image](https://user-images.githubusercontent.com/62002485/147690843-6c2c5f54-0fa8-446a-93e0-268cd48768cc.png)
-
-Điểm yếu 
-- Chiếm nhiều tài nguyên hơn.
-- Footprint được nên giảm được attack.
-- Ít giả mạo được hơn vì FW sẽ phát hiện IP Spoofing nhờ stateful table.
-
-<br>
-
-### Application Level Firewalls:
-- Còn được gọi Application-Proxy Gateways.
-- Có thể inspect sâu bên trong gói HTTP header, SMTP header, có khả
-năng điểu khiển truy cập từ Layer 2 đến Layer 7
-- Deep Packet Inspection : kiểm tra chi tiết gói tin
-nên có khả ngăn chặn các ứng dụng Instant
-Message, Peer to Peer,…
-- Hoạt động ở Layer 7
-
-<br>
-
-- Cơ chế Buffering: vd khi download gom tất cả các mẫu nhỏ và discapsulation thành 1 file và scan nó, nếu ok cho qua.
-- Inspect sâu bên trong protocol hiển thị các application đang chạy ở các port cụ thể, băng thông và người dùng.
-==> Giám sát mạng chạy ntn, nhắc nhở ai đang sdung giao thức quá ngưỡng...
-
-<br>
-
-- Tích hợp được LDAP, active directory để xác thực user password.
-- Tích hợp VPN xác thực Token
-- Biometric: one time password - xác thực vân tay.
-- Log rất chi tiết.
-- Authentication
-- Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
-
-
-<br>
-
-###  Mô hình triển khai tường lửa
-
-#### Gateway Mode: 
-FW là nơi giao tiếp giữa 3 mạng, kết nôi các mạng với nhau, filter trafic đi qua các mạng (client ra I, client qua server, DMZ ra I)
-
-![image](https://user-images.githubusercontent.com/62002485/147693402-c34419c8-bfaf-4c3b-bc3e-f54fbcca3313.png)
-
-#### Bridge Mode: 
-không phá vỡ kiến trúc network của hệ thống hiện tại, chỉ cần cắt dây ra ra nhét FW vào và thiết lập FW đó ở chế độ Bridge mode là xong.
-
-![image](https://user-images.githubusercontent.com/62002485/147694017-0e50e948-8188-44b0-8f65-4631ce29cad0.png)
 
 
 <br>
@@ -380,10 +382,78 @@ không phá vỡ kiến trúc network của hệ thống hiện tại, chỉ c�
 
 <hr>
 
-# SSL
+# SSL/TLS: 
 
-- 2 tinh năng: Authentication(mutual) và Encryption (layer7).
-- Client ko có certificate thì server không xác thực được là client có phải đúng là client hợp lệ hay ko.
+- Giao thức SSL (Secure Socket Layer Protocol)
+và giao thức TLS (Transport Layer Security
+Protocol) là những giao thức bảo mật tại lớp vận
+chuyển được dùng chủ yếu trong thực tế.
+- TLS là một phiên bản sửa đổi của SSL v3.
+- Khi cấu hình liên quan SSL, lưu ý VD: A & B cấu hình SSL với nhau thì phải hỗ trợ version với nhau, web browser và web server 2 đầu SSL cần match version. 
 
 ![image](https://user-images.githubusercontent.com/62002485/147627060-76f392fd-1b7e-4369-9969-106071183edd.png)
+
+- 2 tinh năng: Authentication(mutual) và Encryption (layer7).
+- Client ko có certificate thì server không xác thực được là client có phải đúng là client hợp lệ hay ko. (client anonymous)
+
+<br>
+
+### Cấu trúc của SSL
+
+Giao thức SSL bao gồm 2 thành phần:
+- Thành phần thứ nhất được gọi là record protocol, được 
+đặt trên đỉnh của các giao thức lớp vận chuyển. 
+- Thành phần thứ hai được đặt giữa các giao thức tầng 
+ứng dụng (như HTTP) và record protocol , bao gồm các 
+giao thức:
+  - Handshake protocol
+  - Change-cipher-spec protocol
+  - Alert protocol
+  
+![image](https://user-images.githubusercontent.com/62002485/147700916-bee50897-d19f-43d8-8317-48886e138458.png)
+
+
+### Record protocol của SSL
+
+Gỉả sử dữ liệu là file M, máy A gửi cho B thì từ tầng 7 máy A đi xuống 6,5,... và đến B 1,2,...7.
+Khi đi xuông ở tầng 6 bắt đầu cắt và compress M. Nếu có SSL, tiến hành hash ...... (như hình)
+Sau đó chuyển xuống tầng dưới đóng thêm header tầng 4, 3 vào.
+==> Dữ liệu vừa toàn vẹn vừa an toàn.
+
+![image](https://user-images.githubusercontent.com/62002485/147701676-aec30b28-8fbf-47ad-b8bf-55391f62695c.png)
+
+### Các giao thức của SSL
+
+- Giao thức bắt tay (handshake protocol) thành lập các
+giải thuật mã hóa, giải thuật nén, và các thông số sẽ
+được sử dụng bởi cả hai bên trong việc trao đổi dữ liệu
+được mã hóa. Sau đó, các giao thức bản ghi (record
+protocol) chịu trách nhiệm phân chia thông điệp vào các
+khối, nén mỗi khối, chứng thực chúng, mã hóa chúng,
+thêm header vào mỗi khối, và sau đó truyền đi các khối
+kết quả.
+- Các giao thức đổi mật mã (change-cipher-spec
+protocol) cho phép các bên giao tiếp có thể thay đổi các
+giải thuật hoặc các thông số trong một phiên truyền
+thông.
+- Các giao thức cảnh báo (alert protocol) là một giao
+thức quản lý, nó thông báo cho các bên tham gia truyền
+thông khi có vấn đề xảy ra. VD: Bị drop gói 3 lần đưa ra alert 
+
+<br>
+
+### Quá trình thiết lập kết nối SSL
+
+![image](https://user-images.githubusercontent.com/62002485/147705218-3759bd03-2f21-4339-9f1c-38f4c90b790a.png)
+
+- B1: Client gõ https://..., gửi request đến server.
+- B2: Server nhận request và gửi client thông báo đã nhận.
+- B3: Server gửi certificate của mình (có chứa public key của server) cho client.
+- B4: Server yêu cầu certificate của client.
+- B5: Client gửi certificate của mình cho server. //or not
+- B6: Client generate ra 1 sesion key, sau đó sử dụng public key của server để mã hóa(confidetial - bảo mật) và gửi sesion key đã được mã hóa cho server. Server dùng private key của mình để giải mã.
+- B7: Client dùng private key cảu nó mã hóa (authentication) sesion key. Server dùng public key của client để giải mã và compare (toàn vẹn) 2 session key với nhau. //or not
+Dùng session key mã hóa dữ liệu => tăng performance.
+
+
 
