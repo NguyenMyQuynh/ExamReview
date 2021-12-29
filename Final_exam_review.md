@@ -105,6 +105,7 @@ IPv4 không có bảo mật chạy trong OSI được add on:
 
 - 2 tinh năng chính: Authentication(mutual) và Encryption (layer3).
 - Để thực hiện được chức năng chính của mình là bảo mật dữ liệu trong VPN, IPSec cung cấp những tính năng sau:
+  - Bảo vệ IPv4 khỏi những cuộc tấn công basic vd như spoofing sẽ có authentication...
 
   - Sự bảo mật dữ liệu (Data Confidentiality): Đảm bảo dữ liệu được an toàn, tránh những kẻ tấn công phá hoại bằng cách thay đổi nội dung hoặc đánh cắp dữ liệu quan trọng. Việc bảo vệ dữ liệu được thực hiện bằng các thuật toán mã hóa như DES, 3DES và AES. Tuy nhiên, đây là một tính năng tùy chọn trong IPSec.
 
