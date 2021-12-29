@@ -176,13 +176,23 @@ Certification {đưa certification của chúng ta cho partner để họ import
 
 ![image](https://user-images.githubusercontent.com/62002485/147649926-64ca758e-2726-4565-95d0-44a4a841574f.png)
 
-MSG 1: client gửi gói tin có IP đích đến server, đề xuất thuật toán encryption(aes or RSA) và authentication (md5).
-MSG 2: server phản hồi đồng ý (or không)
-MSG 3: gửi key thông qua cơ chế Diffie-Hellman(thông tin đẻ tạo ra key chứ ko phải key thực sự ... @@) để ko bị lộ key trên đường truyền. Ngoài ra còn đính kèm thêm một giá trị random Nonce khi mã hóa chèn mã đó vào tránh trường hợp bị phá mã.
-MSG 4: gửi key thông qua cơ chế Diffie-Hellman. Sau buiwsc này thống nhất key và hai bên có nonce của nhau.
-MSG 5: initiator tiến hành việc sign lên và sử dụng key(random nên có thể trùng giữa các client) đã thống nhất + nounce (ko trùng do được tạo ra mỗi khi 1client kết nói vô server) để encrypt.
-MSG 6: server trích lục trong hệ quản trị(có 1 loạt các key và nounce) key và nonce nào giải mã ra được thì biết chắc chắn là initiator đó gửi chứ ko phải nào khác, tiến hành reponse signature mã hóa và gửi lại cho initiator. 
+- MSG 1: client gửi gói tin có IP đích đến server, đề xuất thuật toán encryption(aes or RSA) và authentication (md5).
+- MSG 2: server phản hồi đồng ý (or không)
+- MSG 3: gửi key thông qua cơ chế Diffie-Hellman(thông tin đẻ tạo ra key chứ ko phải key thực sự ... @@) để ko bị lộ key trên đường truyền. Ngoài ra còn đính kèm thêm một giá trị random Nonce khi mã hóa chèn mã đó vào tránh trường hợp bị phá mã.
+- MSG 4: gửi key thông qua cơ chế Diffie-Hellman. Sau buiwsc này thống nhất key và hai bên có nonce của nhau.
+- MSG 5: initiator tiến hành việc sign lên và sử dụng key(random nên có thể trùng giữa các client) đã thống nhất + nounce (ko trùng do được tạo ra mỗi khi 1client kết nói vô -server) để encrypt.
+- MSG 6: server trích lục trong hệ quản trị(có 1 loạt các key và nounce) key và nonce nào giải mã ra được thì biết chắc chắn là initiator đó gửi chứ ko phải nào khác, tiến hành reponse signature mã hóa và gửi lại cho initiator. 
+
 <i>Initiator nhận và sử dụng key + nounce đã đượuc nhận từ server để giải mã và xác nhận đsung server đó.</i>
+
+<br>
+
+### Các phương thức hoạt động của IPsec:
+IPSec gửi dữ liệu bằng cách sử dụng chế độ Tunnel hoặc Transport. Các chế độ này có liên quan chặt chẽ đến loại giao thức được sử dụng, AH hoặc ESP.
+
+Chế độ Tunnel: Trong chế độ Tunnel, toàn bộ gói tin được bảo vệ. IPSec gói gói dữ liệu trong một packet mới, mã hóa nó và thêm một IP header mới. Nó thường được sử dụng trong thiết lập VPN site-to-site. Chế độ Tunnel trong IPsec được sử dụng giữa hai router chuyên dụng, với mỗi router hoạt động như một đầu của "đường hầm" ảo thông qua mạng công cộng. Trong chế độ Tunnel, IP header ban đầu chứa đích cuối cùng của gói được mã hóa, cùng với payload gói. Để cho những router trung gian biết nơi chuyển tiếp các gói tin, IPsec thêm một IP header mới. Tại mỗi đầu của đường hầm, những router giải mã những IP header để chuyển các gói đến đích của chúng.
+
+Chế độ Transport: Trong chế độ Transport, IP header gốc vẫn còn và không được mã hóa. Chỉ có payload và ESP trailer được mã hóa mà thôi. Chế độ Transport thường được sử dụng trong thiết lập VPN client-to-site. Trong chế độ Transport, payload của mỗi gói được mã hóa, nhưng IP header ban đầu thì không. Do đó, các router trung gian có thể xem đích cuối cùng của mỗi gói - trừ khi sử dụng một giao thức tunnel riêng biệt (chẳng hạn như GRE).
 
 <br>
 <br>
