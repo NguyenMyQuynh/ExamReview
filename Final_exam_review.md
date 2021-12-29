@@ -526,3 +526,6 @@ Network–based (NIDS/NIPS) và Host–based IDS (HIDS/HIPS)
 Cài HIDS/HIPS, NIDS/NIPS cho server. Trên Core-switch cài IDS monitor tất cả trafic đi qua đi lại client.
 <br>
 Không cài HIPS trên client vì tốn chi phí và make noisy (chặn liên tục, user không sử dụng được).
+
+![image](https://user-images.githubusercontent.com/62002485/147707624-48b0614f-37bb-4791-baf2-2f768f52af63.png)
+
