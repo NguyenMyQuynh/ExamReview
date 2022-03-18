@@ -88,6 +88,10 @@ Can thiệp vào kết nối giữa mạng lan và internet và proxy đứng sa
 bị, ỏa hóa hay phần mềm bảo mật được sử dụng
 để quản lý luồng gói tin qua nó : cho phép
 (permit) hay cấm (deny). Xét chiều đi phải xét chiều về, nếu không vd khhi gửi request thì sẽ không nhận được reponse.
+- Antivirus: focus vào file, phân tích behaviour về mặt system, phát hiện đối tượng file run trên hệ thống có an toàn không
+- Filewall có nhiều function: và Network Security là function chính: protect đc host, tính năng NAT, ẩn địa chỉ IP của server, cho phép thiết lập rule cho phép kiểm soát cho máy này ra internet ở những port nào...
+
+
 
 <br>
 
@@ -130,7 +134,13 @@ Hoạt động ở Layer 2 và Layer 3
 
 ###  Stateful Packet Filter Firewalls
 
+Chức năng tương tự Simple Packet Filter nhưng thêm tính năng lưu được trạng thái của gói tin đi trước, so sánh với gói đi sau để lưu lại quấ trình đi của gói tin.
+
 ![image](https://user-images.githubusercontent.com/62002485/147690843-6c2c5f54-0fa8-446a-93e0-268cd48768cc.png)
+
+- Simple: A communication với B cần thiết lập rule 2 chiều, còn Stateful chỉ cần  xét từ A đến B thì connection sẽ được cập nhật trong stateful table 
+
+![image](https://user-images.githubusercontent.com/62002485/159025511-ec0d177f-ec4b-4b9c-803b-d351db3f33c8.png)
 
 Điểm yếu 
 - Chiếm nhiều tài nguyên hơn.
