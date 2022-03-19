@@ -75,6 +75,39 @@ Can thiệp vào kết nối giữa mạng lan và internet và proxy đứng sa
 
 ![image](https://user-images.githubusercontent.com/62002485/147621172-b2f63fbd-14fb-4157-9379-7cb7f5356c6f.png)
 
+<br>
+<br>
+
+<hr>
+
+# Access control list:
+
+- ACL là một danh sách các điều kiện mà Router/Switch L3 dùng để kiểm tra khi gói tin đi qua một cổng của Router/Switch L3. ACL áp lên interface của thiết bị.
+- Danh sách các điều kiện này cho Router biết loại gói tin nào được chấp nhận hay từ chối dựa trên các điều kiện cụ thể
+- Các điều kiện của ACL :
+  - Địa chỉ Nguồn
+  - Địa chỉ Đích
+  - Giao thức
+  - Port
+
+
+- Cơ chế hoạt động của ACL:
+Khi gói tin đi vào hay đi ra 1 cổng nào đó trên Router. Router sẽ
+dựa vào ACL để kiểm tra gói tin đó để quyết định cho qua hay
+drop gói tin. Gói tin sẽ được kiểm tra theo thứ tự của các điều kiện. 
+Khi kiểm tra phù hợp các thông số : Địa chỉ IP, Giao thức, Port
+sau đó Router kiểm tra tới điều kiện cho phép hay hủy bỏ gói tin. 
+Luôn luôn tồn tại 1 điều kiện cấm tất cả ở cuối danh sách điều
+kiện
+
+![image](https://user-images.githubusercontent.com/62002485/159100853-1d6448a6-f9e9-4d11-bbb6-d384492d38f1.png)
+
+![image](https://user-images.githubusercontent.com/62002485/159100863-215991e0-4eff-44f9-9ab1-87bce5a5a526.png)
+
+![image](https://user-images.githubusercontent.com/62002485/159100898-926a4846-f2df-4484-8fd5-13884e035dda.png)
+
+![image](https://user-images.githubusercontent.com/62002485/159100889-cfc6d3a1-d417-4ebf-8f0c-96f318903f5b.png)
+
 
 <br>
 <br>
