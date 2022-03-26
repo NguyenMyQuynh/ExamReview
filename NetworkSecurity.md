@@ -206,7 +206,7 @@ Message, Peer to Peer,…
 - Authentication
 - Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
 
-Next Generation Firewall:
+## Next Generation Firewall:
 - Protect phía client:
   - Tích hợp anti virus, IDS/ IPS
   - Nó có thể xác thực được các ứng dụng qua port, giao thức, SSL
@@ -220,7 +220,7 @@ Next Generation Firewall:
   - ACL: kiểm tra truy cập ra vào của server, cho phép port cụ thể kêt nối ra ngoài internet 
 
 
-### Injection: sql, command
+## Injection: sql, command
 - sql: dùng các câu truy vấn để khai thác ô input để bypass authentication, lấy thông tin database.
 - command: kết nối vào đc server, dùng command khai thác vulnerability trên server từ đó leo thang đặc quyền(với những quyền user đang có khai thác để lấy được quyền cao hơn).
 Broken authentication:
@@ -230,7 +230,7 @@ Sensitive data:
   
 <br>
 
-### HTTP/HTTPS:
+## HTTP/HTTPS:
 - Next Generation Firewall:
   - Decryption HTTPS->HTTP ra thành 2 phần payload(detect anti virus, dung lượng bất thường chặn đc ddos dos nhờ database pattern attack - signature để detect) và header(kiểm tra được url, ip, application đưa ra các ACL chặn ip, port nào đó, C&C server).
   - Malware: client download về sẽ kiểm tra nếu ok thì chuyển xuống cho client (forward proxy)
@@ -242,6 +242,7 @@ Sensitive data:
 <br>
 
 - Web server tương tác với người dùng
+
 ![image](https://user-images.githubusercontent.com/62002485/160228407-47e8f94e-db03-4ffc-adda-58981bb1687c.png)
 
 ![image](https://user-images.githubusercontent.com/62002485/160228514-6d9bf1a7-d52b-4072-b259-71c21ee253ab.png)
