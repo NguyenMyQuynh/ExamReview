@@ -206,6 +206,50 @@ Message, Peer to Peer,…
 - Authentication
 - Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
 
+Next Generation Firewall:
+- Protect phía client:
+  - Tích hợp anti virus, IDS/ IPS
+  - Nó có thể xác thực được các ứng dụng qua port, giao thức, SSL
+  - Xác định user qua IP
+  - chặn đc giao thức, chặn đc các chức năng cụ thể
+  - detect đc version ứng dụng 
+  - kiểm tra song song (network, web, anti virus) không phải tuần tự như traditional firewall 
+- Protect phía server:
+  - NAT: hidden IP của server 
+  - chặn 1 phần được DOS, DDOS
+  - ACL: kiểm tra truy cập ra vào của server, cho phép port cụ thể kêt nối ra ngoài internet 
+
+
+### Injection: sql, command
+- sql: dùng các câu truy vấn để khai thác ô input để bypass authentication, lấy thông tin database.
+- command: kết nối vào đc server, dùng command khai thác vulnerability trên server từ đó leo thang đặc quyền(với những quyền user đang có khai thác để lấy được quyền cao hơn).
+Broken authentication:
+  - sd tool attack web, crack password (hiện challenge page, hiện option yêu cần điền challenge character)
+Sensitive data:
+  - Client gửi request lấy sensitive data, can thiệp http response detect sensitive key word và block lại và ko để truyền ra bên ngoài. 
+  
+<br>
+
+### HTTP/HTTPS:
+- Next Generation Firewall:
+  - Decryption HTTPS->HTTP ra thành 2 phần payload(detect anti virus, dung lượng bất thường chặn đc ddos dos nhờ database pattern attack - signature để detect) và header(kiểm tra được url, ip, application đưa ra các ACL chặn ip, port nào đó, C&C server).
+  - Malware: client download về sẽ kiểm tra nếu ok thì chuyển xuống cho client (forward proxy)
+- Web application firewall (hoạt động trên nền giao thức http/https, lọc nội dung của ứng dụng web trong khi tường lửa thông thường đóng vai trò như cổng an toàn giữa các máy chủ):
+  - Public dịch vụ web port 80,443, firewall thường ko có pattern về các cuộc tấn công web nên ko detect ra đc.
+  - Decryption HTTPS->HTTP ra thành 2 phần payload( bằng cách kiểm tra lưu lượng HTTP, xem có các pattern liên quan đến các cuộc tấn công như sql injection, buffer oveflow, command injection,broken authentication và các attack liên quan đến web app khác) và header(xem ip, url xem hợp lệ hay không).
+  - Malware: up file lên thì kiểm tra nếu ok thì chuyển lên cho server (preverse proxy - HTTP POST)
+
+<br>
+
+- Web server tương tác với người dùng
+![image](https://user-images.githubusercontent.com/62002485/160228407-47e8f94e-db03-4ffc-adda-58981bb1687c.png)
+
+![image](https://user-images.githubusercontent.com/62002485/160228514-6d9bf1a7-d52b-4072-b259-71c21ee253ab.png)
+
+![image](https://user-images.githubusercontent.com/62002485/160228593-acd6d996-3fd3-4513-a1c5-a7030e6cdb8f.png)
+
+![image](https://user-images.githubusercontent.com/62002485/160228695-48567968-da83-4b33-b536-a596b77341a9.png)
+
 
 <br>
 
