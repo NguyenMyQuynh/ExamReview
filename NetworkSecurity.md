@@ -165,7 +165,7 @@ Hoạt động ở Layer 2 và Layer 3
 
 <br>
 
-###  Stateful Packet Filter Firewalls
+### Stateful Packet Filter Firewalls
 
 Chức năng tương tự Simple Packet Filter nhưng thêm tính năng lưu được trạng thái của gói tin đi trước, so sánh với gói đi sau để lưu lại quấ trình đi của gói tin.
 
