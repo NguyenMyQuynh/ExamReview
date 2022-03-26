@@ -206,6 +206,8 @@ Message, Peer to Peer,…
 - Authentication
 - Có khả năng tạo rule ngăn cản gói tin đã mã hóa (file ko đọc được FW sẽ block luôn)
 
+<br>
+
 ## Next Generation Firewall:
 - Protect phía client:
   - Tích hợp anti virus, IDS/ IPS
@@ -218,6 +220,8 @@ Message, Peer to Peer,…
   - NAT: hidden IP của server 
   - chặn 1 phần được DOS, DDOS
   - ACL: kiểm tra truy cập ra vào của server, cho phép port cụ thể kêt nối ra ngoài internet 
+
+<br>
 
 ## Web application firewall
 
