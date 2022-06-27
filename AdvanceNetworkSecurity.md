@@ -482,6 +482,24 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
 
 ### 4. Trình bày cơ chế hoạt động của của Database Firewall? Mô tả sự khác biệt giữa DBF với WAF?
 
+DBF là một loại WAF (thiết bị / phần mềm, ảo hóa) dùng giám sát CSDL để xác định
+và bảo vệ chống lại các cuộc tấn công nhắm đến CSDL (đánh cắp thông tin nhạy cảm
+trong CSDL) và kiểm tra hoạt động truy cập vào CSDL thông qua log.
+
+Cơ chế hoạt động: DBF tạo một tập hợp các chính sách kiểm tra bảo mật, có thể tùy
+chỉnh và phát hiện các cuộc tấn công CSDL dựa trên các sự cố / mẫu đe dọa cuộc tấn
+công trong quá khứ (signature). Các câu lệnh / truy vấn đầu vào SQL được so sánh
+với các signature này. Danh sách signature được cập nhật liên tục để DBF bảo vệ
+CSDL khỏi các cuộc tấn công mới nhất
+
+Các hệ thống dựa trên signature chỉ có thể xác định các mối đe dọa đã xảy ra. Vì vây,
+ngoài signature, DBF còn sử dụng whitelist và blacklist:
+- whitelist chứa các chuỗi câu lệnh SQL được sử dụng thường xuyên (an toàn).
+DBF so sánh tất cả các truy vấn đến với các câu lệnh whitelistđể xác định xem
+có nên thực thi hay không.
+- Blacklist chứa mô tả về các mối đe dọa tiềm ẩn. Nếu bất kỳ câu lệnh SQL nào
+được DBF phát hiện có trong blacklist sẽ bị chặn ngay lập tức.
+
 ![image](https://user-images.githubusercontent.com/62002485/175992432-1e0b2125-ca1f-4c31-888b-605da8eb3c94.png)
 
 
