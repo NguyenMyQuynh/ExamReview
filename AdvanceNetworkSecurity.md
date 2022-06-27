@@ -510,6 +510,9 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
 
 ![image](https://user-images.githubusercontent.com/62002485/175892691-ad5a092e-62de-4a3c-80fc-12a47e8e3b8e.png)
 
+![image](https://user-images.githubusercontent.com/62002485/175894360-b2aedfaa-edaa-4723-bc6c-0155120b5e39.png)
+
+
 
 <br>
 
