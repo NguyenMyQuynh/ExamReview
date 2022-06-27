@@ -500,6 +500,15 @@ có nên thực thi hay không.
 - Blacklist chứa mô tả về các mối đe dọa tiềm ẩn. Nếu bất kỳ câu lệnh SQL nào
 được DBF phát hiện có trong blacklist sẽ bị chặn ngay lập tức.
 
+Kiểm soát truy cập:
+- Quản lý thông tin đăng nhập và role để hạn chế quyền truy cập dữ liệu
+- Ngăn chặn những người không được phép có thông tin nhạy cảm
+Mã hóa dữ liệu
+- Làm xáo trộn dữ liệu bằng cách sử dụng mật mã dựa trên khóa hoặc làm mờ dữ liệu bằng văn bản thay thế
+- Đảm bảo chỉ đúng người mới đọc được dữ liệu
+Giám sát chủ động
+- Ghi nhật ký chi tiết các lần xác thực không thành công để sử dụng trong kiểm tra giám sát quyền truy cập, cũng như đưa ra cảnh báo về hoạt động bất thường có thể cho thấy mối đe dọa bảo mật
+
 ![image](https://user-images.githubusercontent.com/62002485/175992432-1e0b2125-ca1f-4c31-888b-605da8eb3c94.png)
 
 
@@ -518,7 +527,7 @@ có nên thực thi hay không.
 
 ### 10. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của tính năng network security trong môi trường Docker?
 
-![image](https://user-images.githubusercontent.com/62002485/175892060-eaa8b69e-3fae-4f61-a00a-244abca88eb9.png)
+![image](https://user-images.githubusercontent.com/62002485/176050634-aa6b64b4-1e15-4b45-916a-b15a750b744f.png)
 
 ![image](https://user-images.githubusercontent.com/62002485/175892179-a819a9cd-af0f-41d5-9c0b-55892b13bd60.png)
 
@@ -534,9 +543,40 @@ proxy nó pass hết traffic qua modsec nó xử lí, xử lí theo rule, rồi 
 
 ### 5. Trình bày cơ chế hoạt động của giải pháp Advance Persistent Threat? Mô tả sự khác biệt giữa APT với IDS/IPS?
 
-fireeye nghe bảo là có tích hợp sandbox để chạy thử, phân tích bla bla, còn ids hình như là chỉ theo signature thôi
+Giải pháp phòng chống mối hiểm họa thế hệ mới của FireEye (Web, Email,
+File, Central Management và Malware Analysis) là giải pháp tiên phong trong
+ngành bảo mật với cơ chế signature-less, ngăn chặn các cuộc tấn công có
+mục tiêu, zero-day, APT qua các kênh Web, Email và File.
+- Security Operations Platform: Áp dụng thông tin về các mối đe dọa, sự
+tự động hóa và quản lý hồ sơ của FireEye và các giải pháp của bên thứ
+ba trong nền tảng hoạt động bảo mật thống nhất.
+- Network Security: Cung cấp khả năng hiển thị và bảo vệ mạng chống
+lại các cuộc tấn công mạng tinh vi, gây tổn thất lớn trên toàn thế giới.
+- Endpoint Security: Cung cấp sự bảo vệ toàn diện cho điểm cuối, bảo vệ
+người dùng khỏi các mối đe dọa chung, phát hiện các cuộc tấn công
+tiên tiến và nâng cao khả năng phản ứng.
+- Email Security: Phát hiện các cuộc tấn công không gian mạng dựa trên
+email và chặn các mối đe dọa nguy hiểm nhất bao gồm các tệp đính
+kèm độc hại, các trang web lừa đảo và các cuộc tấn công mạo danh.
+- Managed Defense: Áp dụng những kiến thức đi trước kẻ tấn công và
+phương pháp săn tìm đã được chứng minh để phát hiện và phản ứng
+với các hoạt động mờ ám.
 
-Kiểu như khi client down file về, file sẽ copy 1 bản qua sandbox, nếu sandbox phát hiện ra có vấn đề nó sẽ báo lên firewall r firewall bắt user đó xóa
+Ở đây giải pháp APT được trình bày là Sandbox. Sandbox hoạt động bằng cách giữ cách ly
+chương trình độc hại tiềm ẩn hoặc mã không an toàn khỏi phần còn lại của môi trường của tổ
+chức. Bằng cách này, nó có thể được phân tích một cách an toàn mà không ảnh hưởng đến
+hệ điều hành hoặc thiết bị lưu trữ. Việc phân tích dựa vào behavior của file(malware) và được
+cô lập trên các con VM. Có một máy chủ (server agent) để quan sát các môi trường chứa
+malware. Nếu một mối đe dọa được phát hiện, nó sẽ detect ra và alert cho hệ thống, thường
+là việc loại bỏ sẽ do IPS xử lý. So sánh sandbox với IDS/IPS: 
+- Đối với sandbox thì nhận dạng mã độc dựa vào hành vi, nó được cô lập trong một môi trường riêng tách biệt không ảnh hưởng đến hệ
+thống. Đồng thời nhờ vậy sandbox có thể cách ly malware ngay từ những bước khởi đầu,
+ngay khi malware đang trên máy host chỉ mới thực thi sniffing hay scanning thì sandbox đã
+hoàn thành xong việc phân tích và đưa ra kết quả báo động.
+- IDS chỉ có tác dụng ngăn
+chặn malware khi nó đã thực thi hành động "độc hại". IDS/IPS nhận dạng mã độc dựa vào signature 
+
+
 
 
 
