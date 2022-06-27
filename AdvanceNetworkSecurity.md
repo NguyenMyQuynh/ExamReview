@@ -506,7 +506,7 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
 
 <br>
 
-7. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của đồ án kết hợp giữa NGINX & ModSecurity?
+### 7. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của đồ án kết hợp giữa NGINX & ModSecurity?
 
 ![image](https://user-images.githubusercontent.com/62002485/175991489-f61a51f3-17e6-40aa-b665-7a3eedd55cb7.png)
 
@@ -514,7 +514,7 @@ proxy nó pass hết traffic qua modsec nó xử lí, xử lí theo rule, rồi 
 
 <br>
 
-5. Trình bày cơ chế hoạt động của giải pháp Advance Persistent Threat? Mô tả sự khác biệt giữa APT với IDS/IPS?
+### 5. Trình bày cơ chế hoạt động của giải pháp Advance Persistent Threat? Mô tả sự khác biệt giữa APT với IDS/IPS?
 
 fireeye nghe bảo là có tích hợp sandbox để chạy thử, phân tích bla bla, còn ids hình như là chỉ theo signature thôi
 
