@@ -427,54 +427,38 @@ Next-generation Firewall đóng vai trò như một cổng an toàn giữa các 
 
 ### 2. Trình bày sự khác biệt giữa IDS/IPS ( mô hình và tính năng)?
 
-Intrusion Detection: qui trình theo dõi các sự kiện
-xuất hiện trong `hệ thống máy tính` và `mạng`. Sau đó
-phân tích chúng có dấu hiệu của sự xâm nhập hay
-không?
+- Intrusion Detection System: 
+  - Giám sát hoạt động trên hệ thống mạng và phân tích và phát hiện hoạt động đáng ngờ
+  - Cảnh báo xâm nhập cho đội cũ quản trị mạng
+  - Phối hợp với tường lửa, các phần mềm diệt virus tạo nên hệ thống bảo mật hoàn chỉnh.
 
-Intrusion Detection
-System: là một hệ
-thống tự động giám
-sát hoạt động trên hệ
-thống mạng và phân
-tích để tìm ra các dấu
-hiệu vi phạm đến các
-quy định bảo mật máy
-tính,chính sách sử
-dụng và các tiêu chuẩn
-an toàn thông tin.
-
-![image](https://user-images.githubusercontent.com/62002485/147706065-0d42d6ad-f643-4414-a8b8-1df61276cb7b.png)
+- Intrusion Prevention System:  
+  - Có các tính năng như IDS 
+  - Có thêm tính năng phản ứng, ngăn chặn các xâm nhập trái phép 
 
 <br>
-
-
-Intrusion Prevention
-System: là một hệ
-thống bao gồm cả
-chức năng phát hiện
-xâm nhập (Intrusion
-Detection – ID) và
-khả năng ngăn chặn
-các xâm nhập trái
-phép vào tài nguyên
-của hệ thống mạng
-
-Ngoài giám sát, IPS thực hiện phân tích, kết nối nhiều sensor để học xem malicous trafic có xuất hiện trong toàn mjang không, sau đó đưa về Management 
-Console để quyết định xem có cảnh báo không. 
-Sau khi cảnh báo sẽ đưa ra phản ứng như block, ghi log, alert, cho qua nhưng vẫn log hoặc alert...
-
-![image](https://user-images.githubusercontent.com/62002485/147706570-7c18073d-51a7-422c-a489-33f2ea7efeb4.png)
-
-<br>
-
-### Thành phần chính của IDS/IPS
 
 Nên đặt sau FW để ghi nhớ các cuộc tấn công vượt FW, đặt trược dex bị Ddos attack.
 
-![image](https://user-images.githubusercontent.com/62002485/147706636-9c4669e4-89db-488b-b9ec-d352ddf2cf25.png)
+<br>
 
-![image](https://user-images.githubusercontent.com/62002485/147706653-3d07c190-ebfc-4711-9a61-772caabadc21.png)
+sensor, control, alert, reaction 
+
+<br>
+
+Ngoài giám sát, IPS thực hiện phân tích, kết nối nhiều sensor để học xem malicous trafic có xuất hiện trong toàn mang không, 
+sau đó đưa về Management Console để quyết định xem có cảnh báo không. Sau khi cảnh báo sẽ đưa ra phản ứng như block, ghi log, alert, 
+cho qua nhưng vẫn log hoặc alert...
+
+
+![image](https://user-images.githubusercontent.com/62002485/147706065-0d42d6ad-f643-4414-a8b8-1df61276cb7b.png)
+
+![image](https://user-images.githubusercontent.com/62002485/147706570-7c18073d-51a7-422c-a489-33f2ea7efeb4.png)
+
+
+
+
+
 
 <br>
 
