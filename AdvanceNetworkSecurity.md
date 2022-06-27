@@ -396,15 +396,6 @@ Giám sát chủ động
 
 ## QUIZ:
 
-4. Trình bày cơ chế hoạt động của của Database Firewall? Mô tả sự khác biệt giữa DBF với WAF?
-5. Trình bày cơ chế hoạt động của giải pháp Advance Persistent Threat? Mô tả sự khác biệt giữa APT với IDS/IPS?
-6. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của đồ án kết hợp giữa IPTable & Squid & Clamav?
-7. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của đồ án kết hợp giữa NGINX & ModSecurity?
-8. Trong các đồ án môn học, bạn hãy trình bày mô hình và các kịch bản kiểm thử hệ thống IDS/IPS?
-
-
-
-
 <br>
 
 ### 1. Trình bày cơ chế hoạt động và tính năng theo bạn là quan trọng của Next-Generation Firewall?
@@ -457,9 +448,6 @@ cho qua nhưng vẫn log hoặc alert...
 
 
 
-
-
-
 <br>
 
 ### 3. Trình bày cơ chế hoạt động của của Web Application Firewall? Mô tả sự khác biệt giữa WAF với NG-FW?
@@ -475,6 +463,9 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
 
 ![image](https://user-images.githubusercontent.com/62002485/175879767-a6a340d5-0de5-4187-be3a-867d467036ea.png)
 
+![image](https://user-images.githubusercontent.com/62002485/175992196-3afd92ab-3b9f-499c-91f5-063108058c42.png)
+
+
 - Next Generation Firewall:
   - SSL offload - Decryption HTTPS->HTTP ra thành 2 phần payload(detect anti virus, dung lượng bất thường chặn đc ddos dos nhờ database pattern attack - signature để detect) và header(kiểm tra được url, ip, application đưa ra các ACL chặn ip, port nào đó, C&C server).
   - Malware: client download về sẽ kiểm tra nếu ok thì chuyển xuống cho client (forward proxy)
@@ -486,6 +477,13 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
   - WAF được phân biệt với tường lửa thông thường ở chỗ WAF có thể lọc nội dung của các ứng dụng web cụ thể trong khi tường lửa thông thường đóng vai trò như một cổng an toàn giữa các máy chủ.
   - Bằng cách kiểm tra lưu lượng HTTP, nó có thể ngăn chặn các cuộc tấn công bắt nguồn từ các lỗi bảo mật ứng dụng web, chẳng hạn như chèn SQL, tập lệnh trang web chéo (XSS), bao gồm tệp và cấu hình sai bảo mật
   - Malware: up file lên thì kiểm tra nếu ok thì chuyển lên cho server (Đóng vai trò là reverse proxy)
+
+<br>
+
+### 4. Trình bày cơ chế hoạt động của của Database Firewall? Mô tả sự khác biệt giữa DBF với WAF?
+
+![image](https://user-images.githubusercontent.com/62002485/175992432-1e0b2125-ca1f-4c31-888b-605da8eb3c94.png)
+
 
 
 <br>
@@ -506,6 +504,21 @@ WAF can thiep vao http response, inspect vào payload detect xem có day phai dl
 
 ![image](https://user-images.githubusercontent.com/62002485/175892179-a819a9cd-af0f-41d5-9c0b-55892b13bd60.png)
 
+<br>
+
+7. Trong các đồ án môn học, bạn hãy trình bày mô hình và cách thức hoạt động của đồ án kết hợp giữa NGINX & ModSecurity?
+
+![image](https://user-images.githubusercontent.com/62002485/175991489-f61a51f3-17e6-40aa-b665-7a3eedd55cb7.png)
+
+proxy nó pass hết traffic qua modsec nó xử lí, xử lí theo rule, rồi nó trả lại traffic hoặc là nó block, hoặc là nó drop
+
+<br>
+
+5. Trình bày cơ chế hoạt động của giải pháp Advance Persistent Threat? Mô tả sự khác biệt giữa APT với IDS/IPS?
+
+fireeye nghe bảo là có tích hợp sandbox để chạy thử, phân tích bla bla, còn ids hình như là chỉ theo signature thôi
+
+Kiểu như khi client down file về, file sẽ copy 1 bản qua sandbox, nếu sandbox phát hiện ra có vấn đề nó sẽ báo lên firewall r firewall bắt user đó xóa
 
 
 
