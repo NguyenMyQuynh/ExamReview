@@ -521,6 +521,9 @@ Giám sát chủ động
 
 ![image](https://user-images.githubusercontent.com/62002485/175894360-b2aedfaa-edaa-4723-bc6c-0155120b5e39.png)
 
+![image](https://user-images.githubusercontent.com/62002485/176051910-00d77bbf-1bc8-424c-a19f-6ee37f253fc3.png)
+
+![image](https://user-images.githubusercontent.com/62002485/176051921-1330567b-578c-475d-8f78-6afc71812793.png)
 
 
 <br>
