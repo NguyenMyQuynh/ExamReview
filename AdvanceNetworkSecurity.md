@@ -394,6 +394,66 @@ Giám sát chủ động
 
 <br><br>
 
+## NEXT GENERATION IPS
+### Agile Security
+![image](https://user-images.githubusercontent.com/54493212/175497165-abec20d5-841e-4013-b3e9-f3727f89b9a5.jpg)
+
+#### See: You Can’t Protect What You Can’t See
+- Bề rộng: ai, cái gì, ở đâu, khi nào
+- Bề ngang: chi tiết tùy theo yêu cầu
+- Bảo vệ trong thời gian thực
+- Thấy mọi thứ từ một chỗ (dashboard)
+
+#### Learn: Leverage Awareness For Knowledge
+- Nhìn sâu về khả năng bảo mật của hệ thống
+- Ứng dụng AI 
+- Tương quan, ưu tiên, đưa ra quyết định
+
+#### Adapt: Change is Constant
+- Tự động tối ưu hóa khả năng phòng thủ
+- Khóa (lock down) mạng theo chính sách
+- Tận dụng kiến trúc mở
+- Định cấu hình bảo mật phù hợp tùy chỉnh
+
+#### Act: Act Decisively & Efficiently
+- Chặn, cảnh báo, ghi nhật ký, sửa đổi, cách ly ngay lập tức
+- Phản hồi thông qua tự động hóa
+- Giảm 'tiếng ồn'
+
+### NGIPS
+- Standard first-gen IPS
+- Application awareness
+- Content awareness
+- Full-stack visibility
+- Context awareness
+
+#### Tính năng mới
+- Signature-less Protections: bảo vệ không dựa trên signature mà dựa trên hành vi, content, context
+- Actionable Workflows: truy vết nguồn gốc
+- Connected Visibility: Nhìn thấy được các kết nối liên quan
+
+<br><br>
+
+## Next Gen Threat Protection
+### APT Attack
+![image](https://user-images.githubusercontent.com/54493212/175497185-4f116a1f-00b5-42f9-9bd9-629ecddfd2c0.jpg)
+1. Kẻ tấn công tìm cách thâm nhập máy nạn nhân (VD: gửi email phishing đến máy nạn nhân)
+2. Nạn nhân download malware về và thực thi
+3. Nạn nhân call-back đến C&C server của attacker
+4. Attacker điều khiển máy nạn nhân để thực hiện các hành vi độc hại (VD: đánh cắp dữ liệu)
+
+##### Các giải pháp hiện có (từ chương 1 -> chương 5) chưa giải quyết được loại tấn công này
+![image](https://user-images.githubusercontent.com/54493212/175497187-3120080c-8dd3-4e35-a705-2c43aa5a50f4.jpg)
+
+### FireEye Platform Advantages
+![image](https://user-images.githubusercontent.com/54493212/175497189-41c6c65b-6652-4f14-9aa6-bd61e8ad5cb0.jpg)
+- Thousands of Permutations: Phân tích trên nhiều ứng dụng/thiết bị khác nhau
+- Multi-Flow Analysis: Phân tích trên nhiều luồng (VD: với file pdf sẽ có checklist riêng để phân tích)
+- Multi-Vector Analysic: Phân tích trên 4 đối tượng: Web. email, file, mobile
+- Cross-correlated Intelligence: có hệ thống tập trung cho 4 đối tượng (single dashboard)
+- Bi-direction Cloud Sharing: có thể triển khai trên cloud khi hệ thống bị quá tải
+- Time to protection
+
 ## QUIZ:
 
 <br>
