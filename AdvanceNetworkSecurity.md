@@ -561,13 +561,16 @@ có nên thực thi hay không.
 được DBF phát hiện có trong blacklist sẽ bị chặn ngay lập tức.
 
 Kiểm soát truy cập:
-- Quản lý thông tin đăng nhập và role để hạn chế quyền truy cập dữ liệu
-- Ngăn chặn những người không được phép có thông tin nhạy cảm
-Mã hóa dữ liệu
-- Làm xáo trộn dữ liệu bằng cách sử dụng mật mã dựa trên khóa hoặc làm mờ dữ liệu bằng văn bản thay thế
-- Đảm bảo chỉ đúng người mới đọc được dữ liệu
-Giám sát chủ động
-- Ghi nhật ký chi tiết các lần xác thực không thành công để sử dụng trong kiểm tra giám sát quyền truy cập, cũng như đưa ra cảnh báo về hoạt động bất thường có thể cho thấy mối đe dọa bảo mật
+  - Quản lý thông tin đăng nhập và role để hạn chế quyền truy cập dữ liệu
+  - Ngăn chặn những người không được phép có thông tin nhạy cảm
+
+Mã hóa dữ liệu:
+  - Làm xáo trộn dữ liệu bằng cách sử dụng mật mã dựa trên khóa hoặc làm mờ dữ liệu bằng văn bản thay thế
+  - Đảm bảo chỉ đúng người mới đọc được dữ liệu
+
+Mã hóa dữ liệu:
+  -  Ghi nhật ký chi tiết các lần xác thực không thành công để sử dụng trong kiểm tra giám sát quyền truy cập, cũng như đưa ra cảnh báo về hoạt động bất thường có thể cho thấy mối đe dọa bảo mật
+
 
 ![image](https://user-images.githubusercontent.com/62002485/175992432-1e0b2125-ca1f-4c31-888b-605da8eb3c94.png)
 
